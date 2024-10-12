@@ -225,8 +225,27 @@ libxi6 libxrandr2 libxrender1 libxss1 libxtst6 lsb-release wget xdg-utils
 
 - Compile the typescript code, If typescript installed globally
 ```bash
-  tsc
+  npm install -g typescript
 ```
+- if you are running on Powershell terminal then check below conditions
+```bash
+  Get-ExecutionPolicy
+  ```
+  - if restricted then change Execution Policy Temporarily for the Session (safer option)
+    To allow scripts to run in your current session (without permanently modifying the execution policy), you can use the following command:
+  ```bash
+  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+  ```
+  - Change Execution Policy Permanently (if needed)
+    If you want to change the execution policy for all PowerShell sessions permanently, use the following command:
+    ```bash
+    Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+    ```
+  - Run the following command to compile all the TypeScript code in the current project:
+  ```bash
+    tsc --version
+    tsc
+    ```
 - Create a .env file with following fields
 ```bash
 JWT_SECRET_KEY="MYREALLYSECRETKEY"

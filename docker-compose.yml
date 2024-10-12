@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # MongoDB Service
+  mongo:
+    image: mongo:latest
+    container_name: mean-mongo
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - mean-network
+
+  # Node.js (Express) Service
+  backend:
+    build: ./ResumeBuilderBackend
+    container_name: mean-backend
+    environment:
+      - MONGO_URI=mongodb+srv://pankajgacche:BNYmelon358@cluster0.vs8zbvi.mongodb.net/Mern
+      - NODE_ENV=production
+    ports:
+      - "4292:4292"
+    depends_on:
+      - mongo
+    networks:
+      - mean-network
+
+  # Angular (Frontend) Service
+  frontend:
+    build: ./ResumeBuilderAngular
+    container_name: mean-frontend
+    ports:
+      - "4200:4200"
+    networks:
+      - mean-network
+    stdin_open: true
+    tty: true
+    environment:
+      - API_URL=http://localhost:4200
+
+networks:
+  mean-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.resumeRouter = void 0;
+var express_1 = require("express");
+var ResumeController_js_1 = require("../controllers/ResumeController.js");
+var resumeRouter = (0, express_1.Router)();
+exports.resumeRouter = resumeRouter;
+resumeRouter.post('/createResume', ResumeController_js_1.addResumeEndpoint);
+resumeRouter.get('/myResumes', ResumeController_js_1.getMyResumesEndpoint);
+resumeRouter.get('/getResume/:resumeId', ResumeController_js_1.getResumeEndpoint);
+resumeRouter.post('/createResumeOpenAI', ResumeController_js_1.addResumeOpenAIEndpoint);
+resumeRouter.post('/updateResume', ResumeController_js_1.saveResumeEndpoint);
+resumeRouter.post('/sendToMail', ResumeController_js_1.sendResumeToEmailEndpoint);
