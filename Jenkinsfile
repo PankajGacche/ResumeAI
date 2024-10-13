@@ -20,36 +20,37 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: GIT_CREDENTIALS, usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD')]) {
-                        echo "Cloning repository..."
-                        git branch: BRANCH, credentialsId: GIT_CREDENTIALS, url: 'https://github.com/PankajGacche/ResumeAI.git'
+        //         script {
+        //             withCredentials([usernamePassword(credentialsId: GIT_CREDENTIALS, usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD')]) {
+        //                 echo "Cloning repository..."
+        //                 git branch: BRANCH, credentialsId: GIT_CREDENTIALS, url: 'https://github.com/PankajGacche/ResumeAI.git'
 
-                        // Check if the code was cloned successfully
-                        sh '''
-                        echo "Checking if the repository was cloned..."
-                        ls -la
-                        if [ ! -d "ResumeAI" ]; then
-                            echo "Error: ResumeAI directory not found after cloning."
-                            exit 1
-                        fi
-                        '''
+        //                 // Check if the code was cloned successfully
+        //                 sh '''
+        //                 echo "Checking if the repository was cloned..."
+        //                 ls -la
+        //                 if [ ! -d "ResumeAI" ]; then
+        //                     echo "Error: ResumeAI directory not found after cloning."
+        //                     exit 1
+        //                 fi
+        //                 '''
 
-                        // List the contents of the directory
-                        sh 'ls -la ResumeAI'
-                        sh 'ls -la ResumeAI/ResumeBuilderBackend'
-                        sh 'ls -la ResumeAI/ResumeBuilderAngular'
-                    }
-                }
-            }
-        }
+        //                 // List the contents of the directory
+        //                 sh 'ls -la ResumeAI'
+        //                 sh 'ls -la ResumeAI/ResumeBuilderBackend'
+        //                 sh 'ls -la ResumeAI/ResumeBuilderAngular'
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Build Docker Images') {
-            steps {
-                script {
-                    docker.build('backend', './ResumeAI/ResumeBuilderBackend')
-                    docker.build('frontend', './ResumeAI/ResumeBuilderAngular')
-                }
+        // stage('Build Docker Images') {
+        //     steps {
+        //         script {
+        //             docker.build('backend', './ResumeAI/ResumeBuilderBackend')
+        //             docker.build('frontend', './ResumeAI/ResumeBuilderAngular')
+        //         }
+        checkout scm
             }
         }
 
