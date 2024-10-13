@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: backendrb
+  name: be-deploy-rb
+spec:
+  selector:
+    matchLabels:
+      app: resumebuilder
+  template:
+    metadata:
+      labels:
+        app: resumebuilder
+    spec:
+      containers:
+        - name: resumebuilder
+          image: rajedocker1234/resumeai-backend
+          env:
+            - name: MONGO_URI
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: MONGO_URI
+            - name: PORT
+              value: "4292"
+          # resources:
+          #   limits:
+          #     memory: "128Mi"
+          #     cpu: "500m"
+          ports:
+            - containerPort: 4292

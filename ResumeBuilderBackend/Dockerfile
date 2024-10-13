@@ -1,18 +1,10 @@
-# Use official Node.js as base image
-FROM node:16
-
-# Set working directory
+FROM node:20
 WORKDIR /app
-
-# Install dependencies
-COPY ./package.json /app/
+COPY package*.json ./
+COPY . .
 RUN npm install
-
-# Copy the frontend files
-COPY ./ /app/
-
-# Expose frontend port
-EXPOSE 4200
-
-# Command to run Angular development server
-CMD ["npm", "start"]
+RUN npm install -g typescript
+RUN apt-get update && apt-get install -y chromium
+COPY . .
+EXPOSE 4292
+CMD [ "npm", "start" ]
