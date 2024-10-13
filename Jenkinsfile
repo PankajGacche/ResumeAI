@@ -24,10 +24,6 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: GIT_CREDENTIALS, usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD')]) {
                         echo "Cloning repository..."
                         git branch: BRANCH, credentialsId: GIT_CREDENTIALS, url: 'https://github.com/PankajGacche/ResumeAI.git'
-
-                        // // Debugging: List files to check repository structure
-                        // sh 'ls -la'
-                        // sh 'ls -la ResumeAI'
                     }
                 }
             }
@@ -36,11 +32,14 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    // Building the backend Docker image
-                    docker.build('backend', './ResumeBuilderBackend')
-
-                    // Building the frontend Docker image
-                    docker.build('frontend', './ResumeBuilderAngular')
+                    // Ensure Docker is installed and available
+                    echo "Building Docker images..."
+                    
+                    // Build backend image
+                    docker.build("backend", "./ResumeBuilderBackend")
+                    
+                    // Build frontend image
+                    docker.build("frontend", "./ResumeBuilderAngular")
                 }
             }
         }
@@ -49,19 +48,21 @@ pipeline {
             steps {
                 script {
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: AWS_CREDENTIALS]]) {
-                        // AWS ECR login
+                        echo "Pushing Docker images to AWS ECR..."
+
+                        // AWS ECR login for backend and frontend repositories
                         sh '''
                         aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ECR_REPO_BACKEND
                         aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ECR_REPO_FRONTEND
                         '''
 
-                        // Tagging and pushing the backend Docker image
+                        // Tagging and pushing the backend image
                         sh '''
                         docker tag backend:latest $ECR_REPO_BACKEND:latest
                         docker push $ECR_REPO_BACKEND:latest
                         '''
 
-                        // Tagging and pushing the frontend Docker image
+                        // Tagging and pushing the frontend image
                         sh '''
                         docker tag frontend:latest $ECR_REPO_FRONTEND:latest
                         docker push $ECR_REPO_FRONTEND:latest
@@ -73,7 +74,7 @@ pipeline {
     }
 
     post {
-        cleanup {
+        always {
             cleanWs() // Clean workspace after the build
         }
     }
