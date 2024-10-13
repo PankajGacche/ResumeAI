@@ -25,20 +25,9 @@ pipeline {
                         echo "Cloning repository..."
                         git branch: BRANCH, credentialsId: GIT_CREDENTIALS, url: 'https://github.com/PankajGacche/ResumeAI.git'
 
-                        // // Check if the code was cloned successfully
-                        // sh '''
-                        // echo "Checking if the repository was cloned..."
-                        // ls -la
-                        // if [ ! -d "ResumeAI" ]; then
-                        //     echo "Error: ResumeAI directory not found after cloning."
-                        //     exit 1
-                        // fi
-                        // '''
-
-                        // // List the contents of the directory
-                        // sh 'ls -la ResumeAI'
-                        // sh 'ls -la ResumeAI/ResumeBuilderBackend'
-                        // sh 'ls -la ResumeAI/ResumeBuilderAngular'
+                        // Debugging: List files to check repository structure
+                        sh 'ls -la'
+                        sh 'ls -la ResumeAI'
                     }
                 }
             }
@@ -47,10 +36,12 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
+                    // Building the backend Docker image
                     docker.build('backend', './ResumeAI/ResumeBuilderBackend')
+
+                    // Building the frontend Docker image
                     docker.build('frontend', './ResumeAI/ResumeBuilderAngular')
                 }
-        
             }
         }
 
@@ -58,19 +49,19 @@ pipeline {
             steps {
                 script {
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: AWS_CREDENTIALS]]) {
-                        // Login to AWS ECR
+                        // AWS ECR login
                         sh '''
                         aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ECR_REPO_BACKEND
                         aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ECR_REPO_FRONTEND
                         '''
 
-                        // Tag and push backend image
+                        // Tagging and pushing the backend Docker image
                         sh '''
                         docker tag backend:latest $ECR_REPO_BACKEND:latest
                         docker push $ECR_REPO_BACKEND:latest
                         '''
 
-                        // Tag and push frontend image
+                        // Tagging and pushing the frontend Docker image
                         sh '''
                         docker tag frontend:latest $ECR_REPO_FRONTEND:latest
                         docker push $ECR_REPO_FRONTEND:latest
