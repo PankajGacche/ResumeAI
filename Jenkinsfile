@@ -37,10 +37,10 @@ pipeline {
             steps {
                 script {
                     // Building the backend Docker image
-                    docker.build('backend', './ResumeAI/ResumeBuilderBackend')
+                    docker.build('backend', './ResumeBuilderBackend')
 
                     // Building the frontend Docker image
-                    docker.build('frontend', './ResumeAI/ResumeBuilderAngular')
+                    docker.build('frontend', './ResumeBuilderAngular')
                 }
             }
         }
