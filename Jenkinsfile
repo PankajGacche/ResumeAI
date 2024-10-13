@@ -25,20 +25,20 @@ pipeline {
                         echo "Cloning repository..."
                         git branch: BRANCH, credentialsId: GIT_CREDENTIALS, url: 'https://github.com/PankajGacche/ResumeAI.git'
 
-                        // Check if the code was cloned successfully
-                        sh '''
-                        echo "Checking if the repository was cloned..."
-                        ls -la
-                        if [ ! -d "ResumeAI" ]; then
-                            echo "Error: ResumeAI directory not found after cloning."
-                            exit 1
-                        fi
-                        '''
+                        // // Check if the code was cloned successfully
+                        // sh '''
+                        // echo "Checking if the repository was cloned..."
+                        // ls -la
+                        // if [ ! -d "ResumeAI" ]; then
+                        //     echo "Error: ResumeAI directory not found after cloning."
+                        //     exit 1
+                        // fi
+                        // '''
 
-                        // List the contents of the directory
-                        sh 'ls -la ResumeAI'
-                        sh 'ls -la ResumeAI/ResumeBuilderBackend'
-                        sh 'ls -la ResumeAI/ResumeBuilderAngular'
+                        // // List the contents of the directory
+                        // sh 'ls -la ResumeAI'
+                        // sh 'ls -la ResumeAI/ResumeBuilderBackend'
+                        // sh 'ls -la ResumeAI/ResumeBuilderAngular'
                     }
                 }
             }
