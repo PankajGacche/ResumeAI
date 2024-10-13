@@ -25,9 +25,9 @@ pipeline {
                         echo "Cloning repository..."
                         git branch: BRANCH, credentialsId: GIT_CREDENTIALS, url: 'https://github.com/PankajGacche/ResumeAI.git'
 
-                        // Debugging: List files to check repository structure
-                        sh 'ls -la'
-                        sh 'ls -la ResumeAI'
+                        // // Debugging: List files to check repository structure
+                        // sh 'ls -la'
+                        // sh 'ls -la ResumeAI'
                     }
                 }
             }
