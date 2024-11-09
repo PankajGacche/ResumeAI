@@ -4,7 +4,7 @@ metadata:
   namespace: backendrb
   name: be-service-rb
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: resumebuilder
   ports:

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend  # Ensure this matches the label in the frontend deployment
+  ports:
+    - protocol: TCP
+      port: 4200  # The port exposed by the service
+      targetPort: 4200  # The port the frontend container listens on
+      nodePort: 30000  # This is the specific NodePort for external access
+  type: NodePort  # Use NodePort to expose the frontend locally

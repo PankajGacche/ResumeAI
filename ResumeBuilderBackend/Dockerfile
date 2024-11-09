@@ -1,10 +1,23 @@
-FROM node:20
+# Use an official Node.js runtime as a parent image
+FROM node:20-alpine
+
+# Set the working directory in the container
 WORKDIR /app
+
+# Copy package.json and package-lock.json (or yarn.lock) to the container
 COPY package*.json ./
-COPY . .
+
+# Install dependencies
 RUN npm install
-RUN npm install -g typescript
-RUN apt-get update && apt-get install -y chromium
+
+# Copy the rest of the application files
 COPY . .
+
+# Build the application (for TypeScript or other build steps)
+RUN npm run build
+
+# Expose the port the app runs on
 EXPOSE 4292
-CMD [ "npm", "start" ]
+
+# Run the application
+CMD ["npm", "start"]
