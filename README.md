@@ -46,10 +46,27 @@ The project is a MEAN project and uses node version 18.
 - Login AWS account via cmd.
 ![alt text](ReadMe_Images/image-26.png)
 
-- Apply .yaml files on minikube cluser and creating pods.
+- Apply .yaml files on minikube cluser and deployed application successfully.
 ![alt text](ReadMe_Images/image-27.png)
 ![alt text](ReadMe_Images/image-28.png)
 ![alt text](ReadMe_Images/image-29.png)
+
+- Now deploying mean application using Eks.
+![alt text](ReadMe_Images/image.png)
+![alt text](ReadMe_Images/image-1.png)
+![alt text](ReadMe_Images/image-2.png)
+
+- Apply .yaml files on Eks cluser and deployed application successfully.
+![alt text](ReadMe_Images/image-3.png)
+![alt text](ReadMe_Images/image-4.png)
+![alt text](ReadMe_Images/image-5.png)
+![alt text](ReadMe_Images/image-6.png)
+![alt text](ReadMe_Images/image-7.png)
+
+- Verified deployment created on Eks cluster.
+![alt text](ReadMe_Images/image-8.png)
+![alt text](ReadMe_Images/image-9.png)
+![alt text](ReadMe_Images/image-10.png)
 
 
 

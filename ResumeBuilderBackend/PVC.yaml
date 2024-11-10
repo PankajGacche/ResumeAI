@@ -8,4 +8,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi  # Adjust storage size as needed
+      storage: 10Gi  # Adjust the storage size as needed
+  storageClassName: standard  # Explicitly use the gp2 storage class
