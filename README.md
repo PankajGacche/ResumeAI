@@ -52,21 +52,21 @@ The project is a MEAN project and uses node version 18.
 ![alt text](ReadMe_Images/image-29.png)
 
 - Now deploying mean application using Eks.
-![alt text](ReadMe_Images/image.png)
-![alt text](ReadMe_Images/image-1.png)
-![alt text](ReadMe_Images/image-2.png)
+![alt text](ReadMe_Images/image-30.png)
+![alt text](ReadMe_Images/image-31.png)
+![alt text](ReadMe_Images/image-32.png)
 
 - Apply .yaml files on Eks cluser and deployed application successfully.
-![alt text](ReadMe_Images/image-3.png)
-![alt text](ReadMe_Images/image-4.png)
-![alt text](ReadMe_Images/image-5.png)
-![alt text](ReadMe_Images/image-6.png)
-![alt text](ReadMe_Images/image-7.png)
+![alt text](ReadMe_Images/image-33.png)
+![alt text](ReadMe_Images/image-34.png)
+![alt text](ReadMe_Images/image-35.png)
+![alt text](ReadMe_Images/image-36.png)
+![alt text](ReadMe_Images/image-37.png)
 
 - Verified deployment created on Eks cluster.
-![alt text](ReadMe_Images/image-8.png)
-![alt text](ReadMe_Images/image-9.png)
-![alt text](ReadMe_Images/image-10.png)
+![alt text](ReadMe_Images/image-38.png)
+![alt text](ReadMe_Images/image-39.png)
+![alt text](ReadMe_Images/image-40.png)
 
 
 
